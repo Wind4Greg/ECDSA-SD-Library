@@ -1,0 +1,31 @@
+{
+    "name": "@grottonetworking/ecdsa-sd-2023-cryptosuite",
+    "version": "0.1.3",
+    "description": "JavaScript implementation of the ECDSA-SD-2023 cryptosuite node or browser",
+    "type": "module",
+    "scripts": {
+        "test": "mocha"
+    },
+    "author": "Dr. Greg M. Bernstein",
+    "license": "BSD-3-Clause",
+    "engines": {
+        "node": ">=18"
+    },
+    "browser": {
+        "crypto": false,
+        "./lib/randomBytes.js": "./lib/randomBytes-browser.js"
+    },
+    "dependencies": {
+        "@digitalbazaar/di-sd-primitives": "^3.0.0",
+        "@noble/curves": "^1.1.0",
+        "@noble/hashes": "^1.3.1",
+        "cbor": "^9.0.1",
+        "json-pointer": "^0.6.2",
+        "jsonld": "^8.2.0",
+        "klona": "^2.0.6",
+        "multiformats": "^12.0.1"
+    },
+    "devDependencies": {
+        "standard": "^17.1.0"
+    }
+}
