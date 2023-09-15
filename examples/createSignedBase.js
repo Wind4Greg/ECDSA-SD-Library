@@ -1,4 +1,3 @@
-
 import { mkdir, readFile, writeFile } from 'fs/promises'
 import { localLoader } from './documentLoader.js'
 import { base58btc } from 'multiformats/bases/base58'
@@ -30,7 +29,6 @@ const options = {
   documentLoader: localLoader
 }
 
-
 const proofConfig = {}
 proofConfig.type = 'DataIntegrityProof'
 proofConfig.cryptosuite = 'ecdsa-sd-2023'
@@ -45,5 +43,5 @@ const signedDoc = await signBase(document, keyPair, mandatoryPointers, options)
 console.log(signedDoc)
 // Create output directory if you want
 const baseDir = './output/'
-const status = await mkdir(baseDir, { recursive: true })
+await mkdir(baseDir, { recursive: true })
 writeFile(baseDir + 'signedBase.json', JSON.stringify(signedDoc, null, 2))
