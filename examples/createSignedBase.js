@@ -41,7 +41,7 @@ options.proofConfig = proofConfig
 const signedDoc = await signBase(document, keyPair, mandatoryPointers, options)
 
 console.log(signedDoc)
-// Create output directory if you want
+// Create output directory and write file if you want
 const baseDir = './output/'
 await mkdir(baseDir, { recursive: true })
 writeFile(baseDir + 'signedBase.json', JSON.stringify(signedDoc, null, 2))
