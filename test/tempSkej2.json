@@ -19,7 +19,7 @@
                 "@value": 2022
               }
             ],
-            "@id": "hi:there_bLAh_0"
+            "@id": "urn:test_TST_VECT_0"
           },
           {
             "https://windsurf.grotto-networking.com/selective#boardName": [
@@ -37,7 +37,7 @@
                 "@value": 2019
               }
             ],
-            "@id": "hi:there_bLAh_1"
+            "@id": "urn:test_TST_VECT_1"
           }
         ],
         "https://windsurf.grotto-networking.com/selective#sailNumber": [
@@ -62,7 +62,7 @@
                 "@value": 2023
               }
             ],
-            "@id": "hi:there_bLAh_2"
+            "@id": "urn:test_TST_VECT_2"
           },
           {
             "https://windsurf.grotto-networking.com/selective#sailName": [
@@ -80,7 +80,7 @@
                 "@value": 2023
               }
             ],
-            "@id": "hi:there_bLAh_3"
+            "@id": "urn:test_TST_VECT_3"
           },
           {
             "https://windsurf.grotto-networking.com/selective#sailName": [
@@ -98,7 +98,7 @@
                 "@value": 2020
               }
             ],
-            "@id": "hi:there_bLAh_4"
+            "@id": "urn:test_TST_VECT_4"
           },
           {
             "https://windsurf.grotto-networking.com/selective#sailName": [
@@ -116,15 +116,15 @@
                 "@value": 2023
               }
             ],
-            "@id": "hi:there_bLAh_5"
+            "@id": "urn:test_TST_VECT_5"
           }
         ],
-        "@id": "hi:there_bLAh_6"
+        "@id": "urn:test_TST_VECT_6"
       }
     ],
     "@type": [
       "https://www.w3.org/2018/credentials#VerifiableCredential"
     ],
-    "@id": "hi:there_bLAh_7"
+    "@id": "urn:test_TST_VECT_7"
   }
 ]
