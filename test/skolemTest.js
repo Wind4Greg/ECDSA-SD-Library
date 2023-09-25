@@ -1,6 +1,6 @@
 /* Development code that will later be turned into a test */
 
-import { mkdir, readFile, writeFile } from 'fs/promises'
+import { readFile, writeFile } from 'fs/promises'
 import { localLoader } from './documentLoader.js'
 import jsonld from 'jsonld'
 import { skolemizeExpandedJsonLd } from '../lib/primitives.js'
