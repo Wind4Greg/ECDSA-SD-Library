@@ -12,7 +12,7 @@ const document = JSON.parse(
 const expanded = await jsonld.expand(document, { documentLoader: localLoader })
 // console.log(JSON.stringify(expanded, null, 2))
 await writeFile('tempExpanded.json', JSON.stringify(expanded, null, 2))
-const skolemized = skolemizeExpandedJsonLd(expanded, { prefix: 'urn:test', randString: 'TST_VECT', count: 0 })
+const skolemized = skolemizeExpandedJsonLd(expanded, { bnPrefix: 'urn:test', randString: 'TST_VECT', count: 0 })
 // console.log(JSON.stringify(skolemized, null, 2))
 await writeFile('tempSkolemized.json', JSON.stringify(skolemized, null, 2))
 const labeler = { prefix: 'urn:test', random: 'TST_VECT', count: 0 }
