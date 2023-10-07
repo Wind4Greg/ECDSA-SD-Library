@@ -10,19 +10,19 @@ import { canonicalizeAndGroup, createHmacIdLabelMapFunction, createHmac } from '
 import { hexToBytes } from '@noble/hashes/utils'
 
 // For serialization of JavaScript Map via JSON
-function replacerMap (key, value) { // See https://stackoverflow.com/questions/29085197/how-do-you-json-stringify-an-es6-map
-  if (value instanceof Map) {
-    return {
-      dataType: 'Map',
-      value: Array.from(value.entries()) // or with spread: value: [...value]
-    }
-  } else {
-    return value
-  }
-}
+// function replacerMap (key, value) { // See https://stackoverflow.com/questions/29085197/how-do-you-json-stringify-an-es6-map
+//   if (value instanceof Map) {
+//     return {
+//       dataType: 'Map',
+//       value: Array.from(value.entries()) // or with spread: value: [...value]
+//     }
+//   } else {
+//     return value
+//   }
+// }
 
 // Recreates the JSONified Map
-function reviverMap(key, value) {
+function reviverMap (key, value) {
   if (typeof value === 'object' && value !== null) {
     if (value.dataType === 'Map') {
       return new Map(value.value)
