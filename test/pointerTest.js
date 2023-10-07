@@ -1,29 +1,19 @@
+/* global describe, it */
+import { assert } from 'chai'
 /*
-    Test various selection related functions. Development helper for now
-
-    From RFC6901
-
-    ""           // the whole document
-    "/foo"       ["bar", "baz"]
-    "/foo/0"     "bar"
-    "/"          0
-    "/a~1b"      1
-    "/c%d"       2
-    "/e^f"       3
-    "/g|h"       4
-    "/i\\j"      5
-    "/k\"l"      6
-    "/ "         7
-    "/m~0n"      8
-
+    Test pointer to paths using cases from RFC6901.
 */
 import { jsonPointerToPaths } from '../lib/primitives.js'
 
 const testCases = ['', '/foo', '/foo/0', '/', '/a~1b', '/c%d', '/e^f', '/g|h', '/i\\j',
   '/k\'l', '/ ', '/m~0n']
+const output = [[], ['foo'], ['foo', 0], [''], ['a/b'], ['c%d'], ['e^f'], ['g|h'],
+  ['i\\j'], ["k'l"], [' '], ['m~n']]
 
-testCases.forEach(pointer => {
-  console.log(`${pointer}, ${jsonPointerToPaths(pointer)}`)
+describe('jsonPointerToPaths', function () {
+  for (let i = 0; i < testCases.length; i++) {
+    it(`test string ${testCases[i]}`, function () {
+      assert.deepEqual(output[i], jsonPointerToPaths(testCases[i]))
+    })
+  }
 })
-
-console.log(jsonPointerToPaths('/c%d'))

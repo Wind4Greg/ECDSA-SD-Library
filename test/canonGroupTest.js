@@ -1,9 +1,13 @@
-/* Development code that will later be turned into a test */
+/* global describe, it */
+import { assert } from 'chai'
+/* Test the canonicalizeAndGroup function against two of the published test vectors
+   from the specification.
+*/
 
-import { readFile, writeFile } from 'fs/promises'
+import { readFile } from 'fs/promises'
 import { localLoader } from './documentLoader.js'
 import { canonicalizeAndGroup, createHmacIdLabelMapFunction, createHmac } from '../lib/primitives.js'
-import { bytesToHex, concatBytes, hexToBytes } from '@noble/hashes/utils'
+import { hexToBytes } from '@noble/hashes/utils'
 
 // For serialization of JavaScript Map via JSON
 function replacerMap (key, value) { // See https://stackoverflow.com/questions/29085197/how-do-you-json-stringify-an-es6-map
@@ -17,15 +21,45 @@ function replacerMap (key, value) { // See https://stackoverflow.com/questions/2
   }
 }
 
-// Read input document from a file
-const document = JSON.parse(await readFile(new URL('./input/windDoc.json', import.meta.url)))
-const keyMaterial = JSON.parse(await readFile(new URL('./input/SDKeyMaterial.json', import.meta.url)))
-const mandatory = JSON.parse(await readFile(new URL('./input/windMandatory.json', import.meta.url)))
+// Recreates the JSONified Map
+function reviverMap(key, value) {
+  if (typeof value === 'object' && value !== null) {
+    if (value.dataType === 'Map') {
+      return new Map(value.value)
+    }
+  }
+  return value
+}
+
+// Read input doc, keys, mandatory pointers from files
+const document = JSON.parse(await readFile(new URL('./specTestVectors/windDoc.json',
+  import.meta.url)))
+const keyMaterial = JSON.parse(await readFile(new URL('./specTestVectors/SDKeyMaterial.json',
+  import.meta.url)))
+const mandatory = JSON.parse(await readFile(new URL('./specTestVectors/windMandatory.json',
+  import.meta.url)))
 const hmacKey = hexToBytes(keyMaterial.hmacKeyString)
+// Read Test Vectors from files
+const nquads = JSON.parse(await readFile(new URL('./specTestVectors/addBaseDocHMACCanon.json',
+  import.meta.url)))
+const transformed = JSON.parse(await readFile(new URL('./specTestVectors/addBaseTransform.json',
+  import.meta.url)), reviverMap)
+
 const labelMapFactoryFunction = createHmacIdLabelMapFunction(createHmac(hmacKey))
 const groupDefinitions = { mandatory }
 const groupOutput = await canonicalizeAndGroup(document, labelMapFactoryFunction,
   groupDefinitions, { documentLoader: localLoader })
 // console.log(JSON.stringify(groupOutput, replacerMap, 2))
-await writeFile('canonGroupOut.json', JSON.stringify(groupOutput, replacerMap, 2))
+// await writeFile('canonGroupOut.json', JSON.stringify(groupOutput, replacerMap, 2))
 
+describe('canonicalizeAndGroup', async function () {
+  it('HMACd NQuads', function () {
+    assert.deepEqual(groupOutput.nquads, nquads)
+  })
+  it('mandatory matching nquad map', function () {
+    assert.deepEqual(groupOutput.groups.mandatory.matching, transformed.mandatory)
+  })
+  it('mandatory non-matching nquad map', function () {
+    assert.deepEqual(groupOutput.groups.mandatory.nonMatching, transformed.nonMandatory)
+  })
+})
