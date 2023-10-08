@@ -1,7 +1,7 @@
 {
     "name": "@grottonetworking/ecdsa-sd-2023-cryptosuite",
-    "version": "0.1.3",
-    "description": "JavaScript implementation of the ECDSA-SD-2023 cryptosuite node or browser",
+    "version": "0.1.0",
+    "description": "JavaScript implementation of the ECDSA-SD-2023 cryptosuite",
     "type": "module",
     "scripts": {
         "test": "mocha"
@@ -16,7 +16,6 @@
         "./lib/randomBytes.js": "./lib/randomBytes-browser.js"
     },
     "dependencies": {
-        "@digitalbazaar/di-sd-primitives": "^3.0.0",
         "@noble/curves": "^1.1.0",
         "@noble/hashes": "^1.3.1",
         "cbor": "^9.0.1",
