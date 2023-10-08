@@ -21,10 +21,10 @@ describe('verifyBase', async function () {
     assert.isTrue(result)
   })
   it('invalid base document changed sail number', async function () {
-    const oldSailNo = signedBase.sailNumber
-    signedBase.sailNumber = 'CA101'
+    const oldSailNo = signedBase.credentialSubject.sailNumber
+    signedBase.credentialSubject.sailNumber = 'CA101'
     const result = await verifyBase(signedBase, pubKey, { documentLoader: localLoader })
     assert.isFalse(result)
-    signedBase.sailNumber = oldSailNo
+    signedBase.credentialSubject.sailNumber = oldSailNo
   })
 })

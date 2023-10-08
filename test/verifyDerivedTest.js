@@ -15,16 +15,16 @@ const keyMaterial = JSON.parse(await readFile(new URL('./specTestVectors/SDKeyMa
   import.meta.url)))
 const pubKey = base58btc.decode(keyMaterial.baseKeyPair.publicKeyMultibase).slice(2)
 
-describe('verifyBase', async function () {
+describe('verifyDerived', async function () {
   it('valid derived document', async function () {
     const result = await verifyDerived(signedDerived, pubKey, { documentLoader: localLoader })
     assert.isTrue(result)
   })
   it('invalid derived document changed sail number', async function () {
-    const oldSailNo = signedDerived.sailNumber
-    signedDerived.sailNumber = 'CA101'
+    const oldSailNo = signedDerived.credentialSubject.sailNumber
+    signedDerived.credentialSubject.sailNumber = 'CA101'
     const result = await verifyDerived(signedDerived, pubKey, { documentLoader: localLoader })
     assert.isFalse(result)
-    signedDerived.sailNumber = oldSailNo
+    signedDerived.credentialSubject.sailNumber = oldSailNo
   })
 })

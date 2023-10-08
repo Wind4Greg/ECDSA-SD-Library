@@ -66,10 +66,10 @@ function parseProofValue (proofValue) {
   return decodeThing
 }
 
-console.log('Created Based Proof parsed:')
-console.log(parseProofValue(signedDoc.proof.proofValue))
-console.log('Signed Base Test vector Proof parsed:')
-console.log(parseProofValue(signedBase.proof.proofValue))
+// console.log('Created Based Proof parsed:')
+// console.log(parseProofValue(signedDoc.proof.proofValue))
+// console.log('Signed Base Test vector Proof parsed:')
+// console.log(parseProofValue(signedBase.proof.proofValue))
 
 describe('signBase', async function () {
   it('equivalent to test vector', async function () {
