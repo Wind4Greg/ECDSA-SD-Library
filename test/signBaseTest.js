@@ -51,9 +51,9 @@ proofConfig.proofPurpose = signedBase.proof.proofPurpose
 proofConfig['@context'] = signedBase['@context']
 options.proofConfig = proofConfig
 const signedDoc = await signBase(document, keyPair, mandatory, options)
-console.log(signedDoc)
+// console.log(signedDoc)
 
-function parseProofValue(proofValue) {
+function parseProofValue (proofValue) {
   const proofValueBytes = base64url.decode(proofValue)
   if (proofValueBytes[0] !== 0xd9 || proofValueBytes[1] !== 0x5d || proofValueBytes[2] !== 0x00) {
     throw new Error('Invalid proofValue header')
@@ -65,6 +65,11 @@ function parseProofValue(proofValue) {
   // const [baseSignature, proofPublicKey, hmacKey, signatures, mandatoryPointers] = decodeThing
   return decodeThing
 }
+
+console.log('Created Based Proof parsed:')
+console.log(parseProofValue(signedDoc.proof.proofValue))
+console.log('Signed Base Test vector Proof parsed:')
+console.log(parseProofValue(signedBase.proof.proofValue))
 
 describe('signBase', async function () {
   it('equivalent to test vector', async function () {
