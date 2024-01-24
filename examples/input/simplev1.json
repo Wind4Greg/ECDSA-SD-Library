@@ -1,0 +1,15 @@
+ {
+    "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3id.org/security/data-integrity/v2"
+    ],
+    "id": "urn:uuid:2f16e0fe-26cb-48ae-a172-487bde6e0782",
+    "type": [
+    "VerifiableCredential"
+    ],
+    "issuer": "urn:uuid:my:implementation:issuer:id",
+    "issuanceDate": "2020-03-16T22:37:26.544Z",
+    "credentialSubject": {
+    "id": "did:key:z6MktKwz7Ge1Yxzr4JHavN33wiwa8y81QdcMRLXQsrH9T53b"
+    }
+}
